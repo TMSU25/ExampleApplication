@@ -14,7 +14,7 @@ jobs:
   build:
     working_directory: ~/ExampleApplication
     docker:
-      - image: circleci/node:18  # 최신 LTS 버전 사용
+      - image: circleci/node:18 
     steps:
       - checkout
       - run:
@@ -31,4 +31,4 @@ jobs:
             - ./node_modules
       - run:
           name: Run tests
-          command: npm test  # 추가: 테스트 실행 (테스트가 있다면)
+          command: npm test  
