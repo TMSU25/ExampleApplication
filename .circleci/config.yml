@@ -1,16 +1,16 @@
 version: 2.1
 
-workflow:
+workflows:
   version: 2
   build:
-    job:
+    jobs:
       - bulid:
         filters:
           branches:
             olny:
               - main
 
-job:
+jobs:
   build:
     working_directory: ~/ExampleApplication
     docker:
@@ -21,11 +21,11 @@ job:
           name: update-npm
           command: 'sudo npm install -g npm@5'
       - restore_cache:
-          key: dependancy-cache-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: install-npm
           command: npm install
       - save_cache:
-          key: dependancy-cache-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
