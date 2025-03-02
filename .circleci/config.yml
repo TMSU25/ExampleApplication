@@ -17,9 +17,17 @@ jobs:
       - image: cimg/node:20.8 
     steps:
       - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
       - run:
           name: Install dependencies
           command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
       - run:
           name: Run tests
           command: npm test
