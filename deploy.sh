@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-sudo apt update && sudo apt install nodejs npm
-# Install pm2 which is a production process manager for Node.js with a built-in load balancer.
+sudo apt update && sudo apt install -y nodejs npm
 sudo npm install -g pm2
-# stop any instance of our application running currently
-pm2 stop example_app
-# change directory into folder where application is downloaded
-cd ExampleApplication/
+export PATH=$PATH:/usr/local/bin
+
+# Stop any existing instance
+pm2 stop example_app || true
+
 # Install application dependencies
 npm install
-# start the application with the process name example_app using pm2
+
+# Start the application
 pm2 start ./bin/www --name example_app
